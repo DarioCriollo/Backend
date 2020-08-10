@@ -1,0 +1,25 @@
+version : "3"
+
+services:
+  postgres:
+    image:  postgres
+    ports:  
+      - "5432:5432"
+
+    volumes:
+      -  ~/.docker/laravelprueba/postgres:/var/lib/postgresql/data
+
+    environment:
+      POSTGRES_PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_USER: admin_sigmauser
+      POSTGRES_DB: admin_sigmatest
+      POSTGRES_PASSWORD: pfaDKIJyPF
+
+  web:
+    build: .
+    volumes: 
+      - ./:/opt/data
+    ports:
+      - 8000:80
+    depends_on:
+      - postgres
